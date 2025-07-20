@@ -15,7 +15,7 @@
 
 ## Railway-Specific
 
-### `RAILWAY_ENVIRONMENT`
+### `RAILWAY_ENVIRONMENT_NAME`
 
 - **Railway sets this automatically** to `production`
 - **Used by our server** to allow unsafe scripts in Railway deployment
@@ -26,7 +26,7 @@ The server detects the environment and adjusts Content Security Policy:
 
 ```typescript
 const isDev = process.env.NODE_ENV !== 'production';
-const isRailway = process.env.RAILWAY_ENVIRONMENT === 'production';
+const isRailway = process.env.RAILWAY_ENVIRONMENT_NAME === 'production';
 const allowUnsafeScripts = isDev || isRailway;
 ```
 

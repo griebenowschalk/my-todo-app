@@ -6,15 +6,15 @@ import morgan from 'morgan';
 
 // Environment detection - Railway sets NODE_ENV=production
 const isDev = process.env.NODE_ENV !== 'production';
-const isRailway = process.env.RAILWAY_ENVIRONMENT === 'production';
+const isRailway = process.env.RAILWAY_ENVIRONMENT_NAME === 'production';
 const isRailwayDeploy =
-  process.env.RAILWAY_ENVIRONMENT || process.env.RAILWAY_PROJECT_ID; // Check for any Railway env var
+  process.env.RAILWAY_ENVIRONMENT_NAME || process.env.RAILWAY_PROJECT_ID; // Check for any Railway env var
 const allowUnsafeScripts = isDev || isRailway || isRailwayDeploy; // Allow unsafe scripts in dev OR Railway
 
 // Debug logging
 console.log('Environment Debug:', {
   NODE_ENV: process.env.NODE_ENV,
-  RAILWAY_ENVIRONMENT: process.env.RAILWAY_ENVIRONMENT,
+  RAILWAY_ENVIRONMENT_NAME: process.env.RAILWAY_ENVIRONMENT_NAME,
   RAILWAY_PROJECT_ID: process.env.RAILWAY_PROJECT_ID,
   isDev,
   isRailway,
