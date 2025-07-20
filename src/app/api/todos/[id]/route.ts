@@ -17,7 +17,7 @@ interface UpdateData {
 
 export async function DELETE(request: Request, { params }: Params) {
   try {
-    const { id } = params;
+    const { id } = await params;
     await db.delete(Todos).where(eq(Todos.id, parseInt(id)));
     return NextResponse.json({ message: 'Todo deleted successfully' });
   } catch (error) {
@@ -31,7 +31,7 @@ export async function DELETE(request: Request, { params }: Params) {
 
 export async function PATCH(request: Request, { params }: Params) {
   try {
-    const { id } = params;
+    const { id } = await params;
     const { title, description, completed } = await request.json();
     const updateData: UpdateData = {};
     if (title !== undefined) updateData.title = title;
@@ -53,10 +53,11 @@ export async function PATCH(request: Request, { params }: Params) {
       return NextResponse.json({ error: 'Todo not found' }, { status: 404 });
     }
 
-    const updatedTodo = await db
+    const [updatedTodo] = await db
       .update(Todos)
       .set(updateData)
-      .where(eq(Todos.id, parseInt(id)));
+      .where(eq(Todos.id, parseInt(id)))
+      .returning();
     return NextResponse.json(
       { message: 'Todo updated successfully', todo: updatedTodo },
       { status: 200 }

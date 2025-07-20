@@ -6,3 +6,9 @@ export type Todo = {
   createdAt: Date;
   updatedAt: Date;
 };
+
+export type TodoForm = {
+  title?: string;
+  description?: string;
+  completed?: boolean;
+};

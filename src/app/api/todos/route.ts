@@ -23,7 +23,11 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Title is required' }, { status: 400 });
     }
 
-    const todo = await db.insert(Todos).values({ title, description });
+    const [todo] = await db
+      .insert(Todos)
+      .values({ title, description })
+      .returning();
+
     return NextResponse.json(
       {
         message: 'Todo created successfully',
