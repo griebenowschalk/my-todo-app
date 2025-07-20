@@ -38,7 +38,7 @@ export const TodoList = () => {
           <Card
             className="cursor-pointer hover:border-gray-400"
             key={todo.id}
-            onClick={(e) => {
+            onClick={() => {
               setShowForm(true);
               setEditTodo(todo);
             }}

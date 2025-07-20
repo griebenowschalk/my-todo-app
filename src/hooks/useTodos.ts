@@ -14,7 +14,7 @@ export const useTodos = () => {
       const response = await todoApi.getAll();
       setTodos(response);
       return response;
-    } catch (err) {
+    } catch {
       setError('Failed to refresh todos');
       return null;
     }
