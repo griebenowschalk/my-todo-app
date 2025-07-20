@@ -14,15 +14,15 @@ export const useTodos = () => {
       const response = await todoApi.getAll();
       setTodos(response);
       return response;
-    } catch {
+    } catch (err) {
       setError('Failed to refresh todos');
-      return null;
+      return { error: err };
     }
-  }, []);
+  }, []); // Empty dependency array
 
   useEffect(() => {
     refreshTodos();
-  }, []);
+  }, [refreshTodos]); // Now this is safe
 
   const createTodo = async (data: TodoForm) => {
     setLoading(true);

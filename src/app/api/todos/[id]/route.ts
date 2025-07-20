@@ -4,9 +4,7 @@ import { eq } from 'drizzle-orm';
 import { NextResponse } from 'next/server';
 
 interface Params {
-  params: {
-    id: string;
-  };
+  params: Promise<{ id: string }>;
 }
 
 interface UpdateData {
