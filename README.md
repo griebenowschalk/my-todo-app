@@ -99,7 +99,7 @@ A modern, full-stack todo application built with Next.js 15, featuring real-time
 - `npm run build` - Build for production
 - `npm run start` - Start production server
 - `npm run lint` - Run ESLint
-- `npm test` - Run tests in watch mode
+- `npm run test` - Run tests in watch mode
 - `npm run test:run` - Run tests once
 - `npm run test:coverage` - Run tests with coverage
 - `npm run test:ui` - Run tests with Vitest UI
