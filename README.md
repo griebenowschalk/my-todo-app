@@ -1,5 +1,11 @@
 # My Todo App
 
+[![CI](https://github.com/griebenowschalk/my-todo-app/actions/workflows/ci.yml/badge.svg)](https://github.com/griebenowschalk/my-todo-app/actions/workflows/ci.yml)
+[![codecov](https://codecov.io/gh/griebenowschalk/my-todo-app/badge.svg)](https://codecov.io/gh/griebenowschalk/my-todo-app)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Next.js](https://img.shields.io/badge/Next.js-000000?logo=nextdotjs&logoColor=white)](https://nextjs.org/)
+
 A modern, full-stack todo application built with Next.js 15, featuring real-time updates, responsive design, and a clean user interface.
 
 ## 🚀 Live Demo
@@ -35,6 +41,8 @@ A modern, full-stack todo application built with Next.js 15, featuring real-time
 
 ### Development Tools
 
+- **Vitest** - Fast unit testing framework
+- **Testing Library** - Simple and complete testing utilities
 - **ESLint** - Code linting
 - **Prettier** - Code formatting
 - **Husky** - Git hooks
@@ -91,6 +99,10 @@ A modern, full-stack todo application built with Next.js 15, featuring real-time
 - `npm run build` - Build for production
 - `npm run start` - Start production server
 - `npm run lint` - Run ESLint
+- `npm test` - Run tests in watch mode
+- `npm run test:run` - Run tests once
+- `npm run test:coverage` - Run tests with coverage
+- `npm run test:ui` - Run tests with Vitest UI
 - `npm run db:generate` - Generate database migrations
 - `npm run db:migrate` - Run database migrations
 - `npm run db:push` - Push schema changes to database
@@ -123,10 +135,6 @@ src/
     ├── index.ts       # Database connection
     └── schema.ts      # Drizzle schema
 ```
-
-## 📄 License
-
-This project is open source and available under the [MIT License](LICENSE).
 
 ## 🙏 Acknowledgments
 

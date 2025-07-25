@@ -21,8 +21,6 @@ export const TodoList = () => {
   const [editTodo, setEditTodo] = useState<Todo | null>(null);
   const { deleteTodo, updateTodo, todos: todoList } = useTodoContext();
 
-  console.log('todoList', todoList);
-
   return (
     <div className="flex flex-col gap-4 p-6 pt-0">
       <div className="flex justify-between items-center gap-4 h-16">

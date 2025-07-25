@@ -7,8 +7,6 @@ export const useTodos = () => {
   const [error, setError] = useState<string | null>(null);
   const [todos, setTodos] = useState<Todo[]>([]);
 
-  console.log('todos', todos);
-
   const refreshTodos = useCallback(async () => {
     try {
       const response = await todoApi.getAll();
@@ -50,7 +48,6 @@ export const useTodos = () => {
             todo.id === parseInt(id) ? { ...todo, ...response.todo } : todo
           )
         );
-        console.log('response', response);
       });
       return { success: true };
     } catch (err) {
