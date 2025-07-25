@@ -14,8 +14,6 @@ A modern, full-stack todo application built with Next.js 15, featuring real-time
 - **Form validation** using React Hook Form and Zod
 - **Type-safe** with TypeScript
 - **Real-time state management** with React Context
-- **Optimistic updates** for better user experience
-- **Clean architecture** with separated concerns
 
 ## 🛠️ Tech Stack
 
