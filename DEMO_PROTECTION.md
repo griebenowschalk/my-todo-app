@@ -57,7 +57,7 @@ Add these to your Railway environment:
 ADMIN_SECRET=your-secure-secret-here
 
 # Database URL (usually auto-configured by Railway)
-DATABASE_URL=your-database-url
+DB_URL=your-database-url
 ```
 
 ### Automated Cleanup (Recommended)
