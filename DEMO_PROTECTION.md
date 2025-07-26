@@ -53,9 +53,6 @@ const BLOCKED_WORDS = ['spam', 'advertisement', 'casino', 'your-custom-word'];
 Add these to your Railway environment:
 
 ```bash
-# Optional: Custom admin secret for cleanup endpoint
-ADMIN_SECRET=your-secure-secret-here
-
 # Database URL (usually auto-configured by Railway)
 DB_URL=your-database-url
 ```
@@ -72,9 +69,7 @@ Example cron schedule:
 
 ```bash
 # Run cleanup daily at 2 AM UTC
-0 2 * * * curl -X POST https://your-app.railway.app/api/admin/cleanup \
-  -H "Content-Type: application/json" \
-  -d '{"secret":"your-admin-secret"}'
+0 2 * * * curl https://your-app.railway.app/api/admin/cleanup
 ```
 
 ### Change Cleanup Settings
@@ -84,11 +79,4 @@ Edit `src/lib/cleanup.ts`:
 ```typescript
 private static readonly MAX_TODOS = 500; // Reduce max todos
 private static readonly DAYS_TO_KEEP = 3; // Reduce retention
-```
-
-## Monitoring
-
-```bash
-# Check cleanup stats (public endpoint)
-curl https://your-app.railway.app/api/admin/cleanup
 ```
