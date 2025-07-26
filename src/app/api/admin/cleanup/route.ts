@@ -10,7 +10,9 @@ export async function POST(request: Request) {
     console.log('Parsing request body...');
     let secret = '';
     try {
-      const body = await request.json();
+      // Clone the request to avoid body locking issues
+      const clonedRequest = request.clone();
+      const body = await clonedRequest.json();
       secret = typeof body.secret === 'string' ? body.secret : '';
       console.log('Secret provided:', secret, typeof secret);
     } catch (e) {
