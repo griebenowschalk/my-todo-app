@@ -31,12 +31,12 @@ async function runCleanup() {
     const result = await response.json();
 
     console.log('Cleanup completed successfully:');
-    console.log(`   - Old todos deleted: ${result.results.oldTodosDeleted}`);
+    console.log(`   - Old todos deleted: ${result.stats.oldTodosDeleted}`);
     console.log(
-      `   - Excess todos deleted: ${result.results.excessTodosDeleted}`
+      `   - Excess todos deleted: ${result.stats.excessTodosDeleted}`
     );
     console.log(
-      `   - Inappropriate todos deleted: ${result.results.inappropriateDeleted}`
+      `   - Inappropriate todos deleted: ${result.stats.inappropriateDeleted}`
     );
   } catch (error) {
     console.error('Cleanup failed:', error.message);
