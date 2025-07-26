@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
-// import { DatabaseCleanup } from '@/lib/cleanup';
+import { DatabaseCleanup } from '@/lib/cleanup';
 
-// const ADMIN_SECRET = process.env.ADMIN_SECRET || 'demo-cleanup-key';
+const ADMIN_SECRET = process.env.ADMIN_SECRET || 'demo-cleanup-key';
 
 export async function POST(request: Request) {
   console.log('Cleanup endpoint called at:', new Date().toISOString());
@@ -18,21 +18,21 @@ export async function POST(request: Request) {
       secret = '';
     }
 
-    // if (secret !== ADMIN_SECRET) {
-    //   console.log('Unauthorized access attempt');
-    //   return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-    // }
+    if (secret !== ADMIN_SECRET) {
+      console.log('Unauthorized access attempt');
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
 
     console.log('Authorization successful, starting cleanup...');
     console.log('DB_URL set:', !!process.env.DB_URL);
     console.log('DB_URL length:', process.env.DB_URL?.length || 0);
 
-    // const results = await DatabaseCleanup.runFullCleanup();
-    // console.log('Cleanup completed successfully:', results);
+    const results = await DatabaseCleanup.runFullCleanup();
+    console.log('Cleanup completed successfully:', results);
 
     return NextResponse.json({
       message: 'Cleanup completed successfully',
-      // results,
+      results,
     });
   } catch (error) {
     console.error('Cleanup error occurred:', error);
@@ -64,11 +64,11 @@ export async function POST(request: Request) {
 
 export async function GET() {
   try {
-    // const stats = await DatabaseCleanup.runFullCleanup();
+    const stats = await DatabaseCleanup.runFullCleanup();
 
     return NextResponse.json({
       message: 'Cleanup stats retrieved',
-      // stats,
+      stats,
       lastRun: new Date().toISOString(),
     });
   } catch (error) {
