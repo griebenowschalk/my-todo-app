@@ -1,6 +1,6 @@
 import { db } from '@/db';
 import { Todos } from '@/db/schema';
-import { lt, and, count, or, like } from 'drizzle-orm';
+import { lt, count, or, like, notInArray, desc } from 'drizzle-orm';
 import { BLOCKED_WORDS } from './middleware';
 
 export class DatabaseCleanup {
@@ -37,14 +37,18 @@ export class DatabaseCleanup {
       const todosToKeep = await db
         .select({ id: Todos.id })
         .from(Todos)
-        .orderBy(Todos.createdAt)
+        .orderBy(desc(Todos.createdAt))
         .limit(this.MAX_TODOS);
+
+      if (todosToKeep.length === 0) {
+        return { deleted: 0 };
+      }
 
       const idsToKeep = todosToKeep.map((todo) => todo.id);
 
       const result = await db
         .delete(Todos)
-        .where(and(...idsToKeep.map((id) => lt(Todos.id, id))));
+        .where(notInArray(Todos.id, idsToKeep));
 
       console.log(
         `Limited total todos to ${this.MAX_TODOS}, deleted ${result.rowCount || 0}`
