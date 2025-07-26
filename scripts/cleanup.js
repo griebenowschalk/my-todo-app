@@ -26,6 +26,10 @@ async function runCleanup() {
   try {
     console.log('Starting automated cleanup...');
 
+    console.log('Secret provided:', ADMIN_SECRET, typeof ADMIN_SECRET);
+    console.log('Expected secret:', ADMIN_SECRET, typeof ADMIN_SECRET);
+    console.log('Secrets match:', ADMIN_SECRET === ADMIN_SECRET);
+
     const response = await fetch(`${API_URL}/api/admin/cleanup`, {
       method: 'POST',
       headers: {

@@ -8,8 +8,15 @@ export async function POST(request: Request) {
 
   try {
     console.log('Parsing request body...');
-    const { secret } = await request.json();
-    console.log('Secret provided:', secret ? 'YES' : 'NO');
+    let secret = '';
+    try {
+      const body = await request.json();
+      secret = typeof body.secret === 'string' ? body.secret : '';
+      console.log('Secret provided:', secret, typeof secret);
+    } catch (e) {
+      console.log('Failed to parse JSON body:', e);
+      secret = '';
+    }
 
     if (secret !== ADMIN_SECRET) {
       console.log('Unauthorized access attempt');
