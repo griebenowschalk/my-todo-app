@@ -8,11 +8,11 @@
 
 A modern, full-stack todo application built with Next.js 15, featuring real-time updates, responsive design, and a clean user interface.
 
-## 🚀 Live Demo
+## Live Demo
 
 **[View Live Demo](https://my-todo-app-production-6f44.up.railway.app/)**
 
-## ✨ Features
+## Features
 
 - **Create, Read, Update, Delete** todos with real-time updates
 - **Responsive design** that works on desktop, tablet, and mobile
@@ -21,7 +21,7 @@ A modern, full-stack todo application built with Next.js 15, featuring real-time
 - **Type-safe** with TypeScript
 - **Real-time state management** with React Context
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 ### Frontend
 
@@ -48,7 +48,7 @@ A modern, full-stack todo application built with Next.js 15, featuring real-time
 - **Husky** - Git hooks
 - **lint-staged** - Pre-commit linting
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -74,7 +74,7 @@ A modern, full-stack todo application built with Next.js 15, featuring real-time
    Create a `.env.local` file:
 
    ```env
-   DATABASE_URL=your_database_connection_string
+   DB_URL=your_database_connection_string
    ```
 
 4. **Run database migrations**
@@ -93,7 +93,7 @@ A modern, full-stack todo application built with Next.js 15, featuring real-time
 6. **Open your browser**
    Navigate to [http://localhost:3000](http://localhost:3000)
 
-## 📜 Available Scripts
+## Available Scripts
 
 - `npm run dev` - Start development server
 - `npm run build` - Build for production
@@ -105,7 +105,7 @@ A modern, full-stack todo application built with Next.js 15, featuring real-time
 - `npm run db:push` - Push schema changes to database
 - `npm run db:studio` - Open Drizzle Studio
 
-## 🏗️ Project Structure
+## Project Structure
 
 ```
 src/
@@ -133,7 +133,7 @@ src/
     └── schema.ts      # Drizzle schema
 ```
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - [Next.js](https://nextjs.org/) for the amazing React framework
 - [shadcn/ui](https://ui.shadcn.com/) for the beautiful component library

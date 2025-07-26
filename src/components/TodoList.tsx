@@ -22,7 +22,7 @@ export const TodoList = () => {
   const { deleteTodo, updateTodo, todos: todoList } = useTodoContext();
 
   return (
-    <div className="flex flex-col gap-4 p-6 pt-0">
+    <div className="flex flex-col gap-4 pt-0">
       <div className="flex justify-between items-center gap-4 h-16">
         <div>
           <h3 className="text-2xl font-bold">Todo List</h3>

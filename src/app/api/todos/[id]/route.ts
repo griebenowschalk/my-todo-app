@@ -2,6 +2,12 @@ import { db } from '@/db';
 import { Todos } from '@/db/schema';
 import { eq } from 'drizzle-orm';
 import { NextResponse } from 'next/server';
+import {
+  validateTodoInput,
+  checkRateLimit,
+  getClientIP,
+  createRateLimitResponse,
+} from '@/lib/middleware';
 
 interface Params {
   params: Promise<{ id: string }>;
@@ -14,6 +20,12 @@ interface UpdateData {
 }
 
 export async function DELETE(request: Request, { params }: Params) {
+  const clientIP = getClientIP(request);
+
+  if (!checkRateLimit(clientIP)) {
+    return createRateLimitResponse();
+  }
+
   try {
     const { id } = await params;
     await db.delete(Todos).where(eq(Todos.id, parseInt(id)));
@@ -28,9 +40,25 @@ export async function DELETE(request: Request, { params }: Params) {
 }
 
 export async function PATCH(request: Request, { params }: Params) {
+  const clientIP = getClientIP(request);
+
+  if (!checkRateLimit(clientIP)) {
+    return createRateLimitResponse();
+  }
+
   try {
     const { id } = await params;
-    const { title, description, completed } = await request.json();
+    const data = await request.json();
+
+    const validation = validateTodoInput(data);
+    if (!validation.isValid) {
+      return NextResponse.json(
+        { error: 'Invalid input', details: validation.errors },
+        { status: 400 }
+      );
+    }
+
+    const { title, description, completed } = data;
     const updateData: UpdateData = {};
     if (title !== undefined) updateData.title = title;
     if (description !== undefined) updateData.description = description;

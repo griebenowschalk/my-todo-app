@@ -1,10 +1,22 @@
 import { db } from '@/db';
 import { Todos } from '@/db/schema';
 import { NextResponse } from 'next/server';
+import {
+  validateTodoInput,
+  checkRateLimit,
+  getClientIP,
+  createRateLimitResponse,
+} from '@/lib/middleware';
 
-export async function GET() {
+export async function GET(request: Request) {
+  const clientIP = getClientIP(request);
+
+  if (!checkRateLimit(clientIP)) {
+    return createRateLimitResponse();
+  }
+
   try {
-    const todos = await db.select().from(Todos);
+    const todos = await db.select().from(Todos).limit(100);
     return NextResponse.json(todos);
   } catch (error) {
     console.error(error);
@@ -16,12 +28,24 @@ export async function GET() {
 }
 
 export async function POST(request: Request) {
-  try {
-    const { title, description } = await request.json();
+  const clientIP = getClientIP(request);
 
-    if (!title) {
-      return NextResponse.json({ error: 'Title is required' }, { status: 400 });
+  if (!checkRateLimit(clientIP)) {
+    return createRateLimitResponse();
+  }
+
+  try {
+    const data = await request.json();
+
+    const validation = validateTodoInput(data);
+    if (!validation.isValid) {
+      return NextResponse.json(
+        { error: 'Invalid input', details: validation.errors },
+        { status: 400 }
+      );
     }
+
+    const { title, description } = data;
 
     const [todo] = await db
       .insert(Todos)
