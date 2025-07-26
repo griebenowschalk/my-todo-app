@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "node server-simple.js",
+    "start": "node test-start.js",
     "lint": "next lint",
     "test": "vitest",
     "test:coverage": "vitest run --coverage",
