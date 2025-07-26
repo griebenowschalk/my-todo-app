@@ -1,22 +1,26 @@
-import { NextResponse } from 'next/server';
+import { NextResponse, NextRequest } from 'next/server';
 import { DatabaseCleanup } from '@/lib/cleanup';
 
 const ADMIN_SECRET = process.env.ADMIN_SECRET || 'demo-cleanup-key';
 
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
   console.log('Cleanup endpoint called at:', new Date().toISOString());
 
   try {
     console.log('Parsing request body...');
     let secret = '';
     try {
-      // Clone the request to avoid body locking issues
-      const clonedRequest = request.clone();
-      const body = await clonedRequest.json();
-      secret = typeof body.secret === 'string' ? body.secret : '';
-      console.log('Secret provided:', secret, typeof secret);
+      // Read as text first, then parse as JSON
+      const bodyText = await request.text();
+      console.log('Body text received:', bodyText);
+
+      if (bodyText) {
+        const body = JSON.parse(bodyText);
+        secret = typeof body.secret === 'string' ? body.secret : '';
+        console.log('Secret provided:', secret, typeof secret);
+      }
     } catch (e) {
-      console.log('Failed to parse JSON body:', e);
+      console.log('Failed to parse request body:', e);
       secret = '';
     }
 
