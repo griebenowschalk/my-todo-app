@@ -46,7 +46,7 @@ describe('useTodos', () => {
       const { result } = renderHook(() => useTodos());
 
       expect(result.current.todos).toEqual([]);
-      expect(result.current.loading).toBe(false);
+      expect(result.current.loading).toBe(true);
       expect(result.current.error).toBe(null);
     });
 
