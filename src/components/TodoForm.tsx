@@ -63,30 +63,39 @@ export const TodoForm = ({ onClose, todo, open }: TodoFormProps) => {
         onOpenAutoFocus={(e) => e.preventDefault()} // Prevent auto-focus
       >
         <div className="flex flex-col gap-1">
-          <DialogTitle className="text-2xl font-bold">
+          <DialogTitle
+            data-testid="dialog-title"
+            className="text-2xl font-bold"
+          >
             {todo ? 'Edit Todo' : 'Add Todo'}
           </DialogTitle>
-          <DialogDescription className="text-sm text-gray-500">
+          <DialogDescription
+            data-testid="dialog-description"
+            className="text-sm text-gray-500"
+          >
             {todo ? 'Edit the todo' : 'Add a new todo'}
           </DialogDescription>
         </div>
         <form
+          role="form"
           className="flex flex-col gap-4"
           onSubmit={form.handleSubmit(onSubmit)}
         >
           <Label htmlFor="title">Title</Label>
           <Input
+            data-testid="title-input"
             disabled={loading}
             autoFocus={false}
             {...form.register('title')}
           />
           <Label htmlFor="description">Description</Label>
           <Textarea
+            data-testid="description-input"
             disabled={loading}
             autoFocus={false}
             {...form.register('description')}
           />
-          <Button type="submit" disabled={loading}>
+          <Button data-testid="submit-button" type="submit" disabled={loading}>
             {loading ? 'Saving...' : 'Submit'}
           </Button>
         </form>

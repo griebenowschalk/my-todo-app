@@ -30,23 +30,35 @@ export const TodoList = () => {
           <h3 className="text-2xl font-bold">Todo List</h3>
         </div>
         <div>
-          <Button onClick={() => setShowForm(true)}>Add Todo</Button>
+          <Button data-testid="add-todo" onClick={() => setShowForm(true)}>
+            Add Todo
+          </Button>
         </div>
       </div>
       {!loading && todoList.length === 0 && (
-        <div className="flex justify-center items-center h-full">
+        <div
+          data-testid="no-todos"
+          className="flex justify-center items-center h-full"
+        >
           <p className="text-gray-500">No todos found</p>
         </div>
       )}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
         {loading ? (
           <>
-            <Skeleton className="h-[150px] w-full rounded-xl" />
-            <Skeleton className="h-[150px] w-full rounded-xl" />
+            <Skeleton
+              data-testid="skeleton-1"
+              className="h-[150px] w-full rounded-xl"
+            />
+            <Skeleton
+              data-testid="skeleton-2"
+              className="h-[150px] w-full rounded-xl"
+            />
           </>
         ) : (
           todoList.map((todo) => (
             <Card
+              data-testid={`todo-${todo.id}`}
               className="cursor-pointer hover:border-gray-400"
               key={todo.id}
               onClick={() => {
